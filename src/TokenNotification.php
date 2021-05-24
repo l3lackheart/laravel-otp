@@ -46,7 +46,7 @@ class TokenNotification extends Notification implements ShouldQueue
      */
     public function via($notifiable)
     {
-        $channels = method_exists($notifiable, 'otpChannels') && ! empty($notifiable->otpChannels())
+        $channels = !is_null($notifiable) && method_exists($notifiable, 'otpChannels') && !empty($notifiable->otpChannels())
             ? $notifiable->otpChannels()
             : config('otp.default_channels');
 
@@ -63,10 +63,10 @@ class TokenNotification extends Notification implements ShouldQueue
     public function toMail(): MailMessage
     {
         return (new MailMessage())
-            ->subject(config('app.name').' One Time Password')
+            ->subject(config('app.name') . ' One Time Password')
             ->greeting('Hello!')
             ->line('Somebody recently requested for a one-time password in behalf of you.')
-            ->line('You can enter the following reset code: '.$this->token->plainText())
+            ->line('You can enter the following reset code: ' . $this->token->plainText())
             ->line('If you didn\'t request the password, simply ignore this message.');
     }
 
@@ -78,7 +78,7 @@ class TokenNotification extends Notification implements ShouldQueue
     public function toSms(): string
     {
         return 'Somebody recently requested a one-time password.'
-        ." You can enter the following reset code: {$this->token->plainText()}"
-        .' If you didn\'t request the password, simply ignore this message.';
+            . " You can enter the following reset code: {$this->token->plainText()}"
+            . ' If you didn\'t request the password, simply ignore this message.';
     }
 }
