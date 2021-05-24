@@ -1,7 +1,7 @@
 {
-    "name": "erdemkeren/laravel-otp",
+    "name": "l3lackheart/laravel-otp",
     "description": "Secure your laravel routes with otps. (one time passwords)",
-    "homepage": "https://github.com/erdemkeren/laravel-otp",
+    "homepage": "https://github.com/l3lackheart/laravel-otp",
     "keywords": ["laravel", "otp", "one time passwords", "one time pin", "middleware"],
     "license": "MIT",
     "authors": [
